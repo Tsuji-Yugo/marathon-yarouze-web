@@ -14,6 +14,7 @@ interface Runner {
   team_type: string;
   background: string;
   running_form: string;
+  foot_strike: string;
   height: number;
   weight: number;
   speed: number;
@@ -189,7 +190,7 @@ export default async function TopPage() {
                         href={`/races?runner_id=${runner.id}`}
                         className="flex items-center justify-center bg-orange-600 hover:bg-orange-500 text-white font-black py-4 rounded-xl shadow-lg shadow-orange-900/40 transition-all text-xs uppercase italic tracking-widest active:scale-95"
                         >
-                         Race Entry
+                        Race Entry
                       </Link>
                     </div>
                   </div>
