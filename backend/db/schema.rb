@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_29_043715) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_29_095232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,17 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_29_043715) do
     t.integer "days_to_race", default: 30
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "prefecture"
+    t.string "city"
+    t.string "team_type"
+    t.string "background"
+    t.string "running_form"
+    t.string "foot_strike"
+    t.float "height"
+    t.float "weight"
+    t.integer "growth"
+    t.integer "stamina"
+    t.integer "speed"
     t.index ["user_id"], name: "index_runners_on_user_id"
   end
 
