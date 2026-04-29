@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -29,9 +29,20 @@ export default function LoginPage() {
       setLoading(false);
     } else {
       // ✅ 成功したらトップページ（/）へ遷移
-      // page.tsxのロジックにより、ログイン後は自動的にダッシュボード画面が表示されます
-      router.push("/");
-      router.refresh(); // セッション情報を確実に反映させるためにリフレッシュ
+      // 最新のセッション情報（ログインしたユーザーの情報）を今すぐ取得する
+      const session = await getSession();
+
+      // lib/auth.ts で設定した isAdmin フラグをチェック
+      // @ts-ignore
+      if (session?.user?.isAdmin) {
+        // 管理者（marathon.yarouze@gmail.com）なら管理者画面へ
+        router.push("/admin");
+      } else {
+        // それ以外の一般ランナーはトップページ（ダッシュボード）へ
+        router.push("/");
+      }
+      
+      router.refresh();
     }
   };
 

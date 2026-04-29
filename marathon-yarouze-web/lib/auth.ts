@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
-  // どのような方法でログインさせるかを定義
+  // 1. ログインプロバイダーの設定
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -11,8 +11,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        // Rails バックエンドのログイン API を叩く
-        // ※ Rails 側に login アクションを作っていない場合は、今のところ null を返す形になります
         try {
           const res = await fetch("http://127.0.0.1:3000/api/v1/auth/login", {
             method: "POST",
@@ -32,23 +30,32 @@ export const authOptions: NextAuthOptions = {
       }
     })
   ],
-  // ログイン後のデータをセッションに保存する設定
+
+  // 2. ログイン後のデータ処理（管理者判定を追加）
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.user = user;
+        // 特定のメールアドレスなら管理者フラグを立てる
+        // @ts-ignore
+        token.isAdmin = user.email === "marathon.yarouze@gmail.com";
       }
       return token;
     },
     async session({ session, token }) {
       session.user = token.user as any;
+      // セッションにも管理者情報を引き継ぐ
+      if (session.user) {
+        // @ts-ignore
+        session.user.isAdmin = token.isAdmin;
+      }
       return session;
     }
   },
-  // カスタムログインページなどの指定
+
+  // 3. 各種設定
   pages: {
     signIn: "/login",
   },
-  // セッションの暗号化に使う秘密鍵
   secret: process.env.NEXTAUTH_SECRET,
 };
