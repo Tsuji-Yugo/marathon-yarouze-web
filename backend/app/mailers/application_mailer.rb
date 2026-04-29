@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  # ここは Rails がメールを送るための基本クラスです
+  default from: ENV['GMAIL_USER']
   layout "mailer"
 end

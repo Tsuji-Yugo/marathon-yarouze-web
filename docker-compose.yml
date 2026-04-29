@@ -15,18 +15,24 @@ services:
     build:
       context: ./backend
     user: root
+    working_dir: /app
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - ./backend:/rails
+      - ./backend:/app
     ports:
       - "3000:3000"
     depends_on:
       - db
+    env_file:
+      - ./marathon-yarouze-web/.env.local
     environment:
       DATABASE_URL: postgres://postgres:password@db:5432/marathon_yarouze_development
       RAILS_ENV: development
       BUNDLE_DEPLOYMENT: "false" # 追加
       BUNDLE_WITHOUT: ""
+      GMAIL_USER: ${GMAIL_USER}
+      GMAIL_PASSWORD: ${GMAIL_PASSWORD}
+      WORKING_DIR: /app
 
 volumes:
   postgres_data:
