@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :runners, only: [:index]
       post 'auth/register', to: 'auth#register'
       post 'auth/verify', to: 'auth#verify'
+      post 'auth/login', to: 'auth#login'
     end
   end
 end

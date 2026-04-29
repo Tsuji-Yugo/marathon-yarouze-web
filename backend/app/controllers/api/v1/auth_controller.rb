@@ -44,4 +44,21 @@ class Api::V1::AuthController < ApplicationController
       render json: { error: "認証コードが間違っているか、有効期限が切れています" }, status: :unauthorized
     end
   end
+  def login
+    # 1. メールアドレスでユーザーを探す
+    user = User.find_by(email: params[:email])
+
+    # 2. ユーザーが存在し、パスワードが合っているかチェック (authenticate は Rails の標準機能)
+    if user && user.password == params[:password]
+      # 3. NextAuth が扱いやすい形（id, name, email）にして返す
+      render json: { 
+        id: user.id.to_s, 
+        name: user.nickname, 
+        email: user.email 
+      }, status: :ok
+    else
+      # パスワードが違う、またはユーザーがいない場合
+      render json: { error: "メールアドレスかパスワードが間違っています。" }, status: :unauthorized
+    end
+  end
 end

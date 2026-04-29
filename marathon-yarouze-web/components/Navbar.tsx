@@ -13,7 +13,7 @@ export default function Navbar() {
     return (
       <nav className="bg-zinc-900 border-b border-zinc-800 p-4">
         <div className="max-w-4xl mx-auto">
-          <Link href="/" className="text-orange-500 font-black text-xl italic">MARATHON YAROUZE</Link>
+          <Link href="/" className="text-orange-500 font-black text-xl italic">マラソンやろうぜ</Link>
         </div>
       </nav>
     );
@@ -23,7 +23,7 @@ export default function Navbar() {
     <nav className="bg-zinc-900 border-b border-zinc-800 p-4 sticky top-0 z-50">
       <div className="max-w-4xl mx-auto flex justify-between items-center">
         <Link href="/" className="text-orange-500 font-black text-xl italic">
-          MARATHON YAROUZE
+          マラソンやろうぜ
         </Link>
 
         {/* ハンバーガーボタン */}
