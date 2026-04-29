@@ -185,9 +185,12 @@ export default async function TopPage() {
                       <button className="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-black py-4 rounded-xl border border-zinc-700 transition-all text-xs uppercase italic tracking-widest active:scale-95">
                         Training
                       </button>
-                      <button className="bg-orange-600 hover:bg-orange-500 text-white font-black py-4 rounded-xl shadow-lg shadow-orange-900/40 transition-all text-xs uppercase italic tracking-widest active:scale-95">
-                        Race Entry
-                      </button>
+                      <Link 
+                        href={`/races?runner_id=${runner.id}`}
+                        className="flex items-center justify-center bg-orange-600 hover:bg-orange-500 text-white font-black py-4 rounded-xl shadow-lg shadow-orange-900/40 transition-all text-xs uppercase italic tracking-widest active:scale-95"
+                        >
+                         Race Entry
+                      </Link>
                     </div>
                   </div>
                 </div>

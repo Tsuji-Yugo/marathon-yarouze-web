@@ -21,7 +21,8 @@ export default function Navbar() {
 
   return (
     <nav className="bg-zinc-900 border-b border-zinc-800 p-4 sticky top-0 z-50">
-      <div className="max-w-4xl mx-auto flex justify-between items-center">
+      {/* ▼ 変更点1：max-w-4xl を外して w-full に変更 ▼ */}
+      <div className="w-full px-2 md:px-6 mx-auto flex justify-between items-center">
         <Link href="/" className="text-orange-500 font-black text-xl italic">
           マラソンやろうぜ
         </Link>
@@ -39,7 +40,8 @@ export default function Navbar() {
       {/* ドロップダウンメニュー */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-zinc-800 border-b border-zinc-700 shadow-2xl animate-in slide-in-from-top-1">
-          <div className="max-w-4xl mx-auto flex flex-col p-4">
+          {/* ▼ 変更点2：メニューの中身も max-w-4xl を w-full に合わせて変更 ▼ */}
+          <div className="w-full px-6 md:px-10 mx-auto flex flex-col p-4">
             <p className="text-zinc-500 text-xs mb-4 px-2">LOGIN AS: {session.user?.email}</p>
             <Link href="/" onClick={() => setIsOpen(false)} className="p-3 text-zinc-100 hover:bg-zinc-700 rounded-lg">ダッシュボード</Link>
             <Link href="/training" onClick={() => setIsOpen(false)} className="p-3 text-zinc-100 hover:bg-zinc-700 rounded-lg">トレーニング記録</Link>

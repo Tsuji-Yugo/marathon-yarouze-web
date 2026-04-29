@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post 'auth/register', to: 'auth#register'
       post 'auth/verify', to: 'auth#verify'
       post 'auth/login', to: 'auth#login'
+      resources :marathons, only: [:index]
     end
   end
 end
